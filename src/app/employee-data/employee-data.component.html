@@ -1,0 +1,10 @@
+<div style="text-align: center;">
+	<div class="row">	
+		<div class="col-md-6 mx-auto">
+			<app-employee [childMessage]="parentMessage" (messageEvent)="receiveMessage($event)"></app-employee>		
+		</div>
+		<div class="col-md-12">
+			<app-employee-list></app-employee-list>	
+		</div>	
+	</div>
+</div>

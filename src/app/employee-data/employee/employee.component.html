@@ -1,0 +1,45 @@
+
+<h3 class="jumbotron navbar-custom text-white">Create Employeer</h3>
+<form class="emp-forms" #employeeForms="ngForm" (ngSubmit)="onSubmit(employeeForms.form.valid && employeeForms)">
+	<div class="form-group row">
+
+		<div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+			<input class="form-control"  name="EmployeeName" [(ngModel)]="selectedEmployee.EmployeeName" placeholder="Employee-Name" #EmployeeName="ngModel" required>
+			<div [hidden]="EmployeeName.valid || EmployeeName.pristine"class="alert alert-danger">
+			  Name is required
+			</div>
+		</div>
+		<div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+			<input class="form-control" name="EmployeeCode" #EmployeeCode="ngModel" [(ngModel)]="selectedEmployee.EmployeeCode" placeholder="Employee-code">
+		</div>
+		<div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+			<input class="form-control" type="email" name="EmployeeEmail" #EmployeeEmail="ngModel" [(ngModel)]="selectedEmployee.EmployeeEmail" placeholder="Employee-email" required [email]="true">
+			<div [hidden]="EmployeeEmail.valid || EmployeeEmail.pristine" class="alert alert-danger">
+			  Email is required
+			</div>
+		</div>
+		<div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+			<input type="date" name="EmployeeBirth" class="form-control" [(ngModel)]="selectedEmployee.EmployeeBirth" [ngModel]="selectedEmployee.EmployeeBirth  | date:'yyyy-MM-dd'" #EmployeeBirth="ngModel" [ngClass]="{ 'is-invalid': EmployeeBirth.invalid }" required pattern="^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$">
+			<div *ngIf="EmployeeBirth.invalid" class="invalid-feedback">
+				<div *ngIf="EmployeeBirth.errors.required">Date of Birth is required</div>
+				<div *ngIf="EmployeeBirth.errors.pattern">Date of Birth must be a valid date in the format YYYY-MM-DD</div>
+			</div>
+		</div>
+		<div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+			<!--input class="form-control" type="number" name="EmployeeStatus" #EmployeeStatus="ngModel" [(ngModel)]="selectedEmployee.EmployeeStatus" placeholder="Employee-status"-->
+			<select class="form-control select" required name="StatusID" #EmployeeStatus="ngModel"
+			          [(ngModel)]="selectedEmployee.StatusID">
+			           <option value="">Choose status</option>
+			    <option *ngFor="let status of employeeService.StatusList" [value]="status.id">{{status.name}}</option>
+			</select>
+		</div> 
+		<input type="hidden"  name="EmployeeID" #EmployeeID="ngModel" [(ngModel)]="selectedEmployee.EmployeeID">
+		<div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+			<button type="submit" class="btn btn-primary btn-lg btn-block" [disabled]="!employeeForms.form.valid" style="background-color: #3f51b5;">Submit</button>
+		</div>
+		<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+			<button type="button" class="btn btn-dark btn-lg btn-block" (click)="resetForm(employeeForms)">Reset</button> 
+		</div>
+
+	</div>
+</form>

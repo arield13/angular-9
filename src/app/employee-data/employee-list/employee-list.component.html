@@ -1,0 +1,74 @@
+<h3 class="navbar-custom text-white text-center">Users List</h3>
+<form>
+  <div class="form-group row">
+    <div class="input-group col-lg-3 col-sm-12">
+      <div class="input-group-addon ">
+        <i class="glyphicon glyphicon-search"></i>
+      </div>
+      <input
+        type="text"
+        class="form-control"
+        name="searchString"
+        placeholder="Type to search..."
+        [(ngModel)]="searchString"
+      />
+    </div>
+  </div>
+</form>
+<div  id="no-more-tables">
+  <table  class="col-sm-12 table-striped table-condensed cf" style="padding: 0px;">
+    <thead class="thead-info cf">
+        <tr>
+          <th class="redtext">Name</th>
+          <th>Code</th>
+          <th>Email</th>
+          <th>Birth</th>
+          <th>Status</th>
+          <th>Option</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let employee of EmployeeList | filter : 'EmployeeName': searchString">
+        <td data-title="Name">{{employee.EmployeeName}}</td>
+        <td data-title="Code">{{employee.EmployeeCode}}</td>
+        <td data-title="Email">{{employee.EmployeeEmail}}</td>
+        <td data-title="Birth">{{employee.EmployeeBirth | date}}</td>
+        <td data-title="Status">
+          <a class="btn" [ngClass]="(employee.StatusID == 1 ? 'text-info': 'text-danger')">
+            <i [ngClass]="(employee.StatusID == 1 ? 'fa fa-check-circle': 'fa fa-times-circle')"></i>
+          </a>
+        </td>
+        <td data-title="Option">
+          <a class="btn text-info" (click)="editEmployee(employee)">
+            <i class="fa fa-pencil"></i>
+          </a>
+          <a class="btn text-danger" (click)="onDelete(employee,content)">
+            <i class="fa fa-trash"></i>
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<!--div class="flexbox-container">
+	<div class="flexbox-item flexbox-item-1"></div>
+	<div class="flexbox-item flexbox-item-2"></div>
+	<div class="flexbox-item flexbox-item-3"></div>
+</div-->
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Confirmation</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>Do you want to remove <b>{{empName}}</b>?</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel click')">Cancel</button>
+    <button type="button" class="btn btn-danger" (click)="deleteEmployee()">Ok</button>
+  </div>
+</ng-template>
+
+

@@ -1,0 +1,25 @@
+ng new project
+ng g c EmployeeData
+ng g c employee-data/Employee
+ng g c employee-data/Employee-List
+ng g class employee-data/ShareEmployee/Employe
+ng g s employee-data/ShareEmployee/employee
+npm install --save rxjs-compat
+npm install --save @angular/http
+import { FormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
+npm install @angular/localize --save
+import '@angular/localize/init'; to your polyfills.ts
+npm install @ng-bootstrap/ng-bootstrap
+"yourApp": {
+  "architect": {
+    "build": {
+      "options": {
+        "styles": [
+          "node_modules/bootstrap/dist/css/bootstrap.min.css"
+        ]
+      }
+    }
+  }
+}
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
